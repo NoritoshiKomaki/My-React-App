@@ -13,13 +13,12 @@
   <script type="text/babel">
   (() => {
 
-    const name = 'taguchi';
+    function showMessage() {
+      alert('Hello');
+    }
+
     ReactDOM.render(
-      <div>
-        <p>Hello</p>
-        <hr/>
-        <p>World</p>
-      </div>,
+      <div className="box" onClick={showMessage}></div>,
       document.getElementById('root')
     );
   })();
