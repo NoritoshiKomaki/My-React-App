@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <title>React Practice</title>
@@ -11,55 +11,58 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
-  (() => {
+    (() => {
 
-    class Counter extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          count: 0
-        };
-        this.countUp = this.countUp.bind(this);
-      }
-      countUp() {
-        this.setState(prevState => {
-          return {
-            count: prevState.count + 1
-          };
-        });
-      }
-      render() {
+      function Counter(props) {
         return (
-          <li style={{backgroundColor:this.props.color}} onClick={this.countUp}>
-            {this.state.count}
+          <li style={{backgroundColor:props.counter.color}}>
+            {props.counter.id}:{props.counter.count}
           </li>
         );
       }
-    }
 
-    class App extends React.Component {
-      constructor() {
-        super();
-      }
-      render() {
+      function CounterList(props) {
+        const counters = props.counters.map(counter => {
+          return (
+            <Counter
+              counter={counter}
+              key={counter.id}
+            />
+          );
+        });
         return (
-          <div className="container">
-            <ul>
-              <Counter color="tomato"/>
-              <Counter color="skyblue"/>
-              <Counter color="limegreen"/>
-            </ul>
-            <div>TOTAL INVENTORY: 3</div>
-          </div>
-        )
+          <ul>
+            {counters}
+          </ul>
+        );
       }
-    }
 
-    ReactDOM.render(
-      <App/>,
-      document.getElementById('root')
-    );
-  })();
+      class App extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            counters: [
+              {id: 'A', count: 0, color: 'tomato'},
+              {id: 'B', count: 0, color: 'skyblue'},
+              {id: 'C', count: 0, color: 'limegreen'}
+            ]
+          };
+        }
+        render() {
+          return (
+            <div className="container">
+              <CounterList counters={this.state.counters}/>
+              <div>TOTAL INVENTORY: 3</div>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <App/>,
+        document.getElementById('root')
+      );
+    })();
   </script>
 </body>
 </html>
