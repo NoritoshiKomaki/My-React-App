@@ -9,6 +9,20 @@
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
 <body>
-  <script type="text/babel"></script>
+  <div id="root"></div>
+  <script type="text/babel">
+  (() => {
+
+    const name = 'taguchi';
+    ReactDOM.render(
+      <div>
+        <p>Hello</p>
+        <hr/>
+        <p>World</p>
+      </div>,
+      document.getElementById('root')
+    );
+  })();
+  </script>
 </body>
 </html>
